@@ -130,4 +130,12 @@ public class UserService {
         res.setAddress(user.getAddress());
         return res;
     }
+
+    public void updateUserToken(String token, String email) {
+        User currentUSer = this.handleGetUserByUsername(email);
+        if(currentUSer != null) {
+            currentUSer.setRefreshToken(token);
+            this.userRepository.save(currentUSer);
+        }
+    }
 }
