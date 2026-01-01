@@ -18,10 +18,10 @@ import com.turkraft.springfilter.boot.Filter;
 
 import jakarta.validation.Valid;
 import vn.hoidanit.jobhunter.domain.User;
-import vn.hoidanit.jobhunter.domain.respone.ResCreateUserDTO;
-import vn.hoidanit.jobhunter.domain.respone.ResUpdateUserDTO;
-import vn.hoidanit.jobhunter.domain.respone.ResUserDTO;
-import vn.hoidanit.jobhunter.domain.respone.ResultPaginationDTO;
+import vn.hoidanit.jobhunter.domain.response.ResCreateUserDTO;
+import vn.hoidanit.jobhunter.domain.response.ResUpdateUserDTO;
+import vn.hoidanit.jobhunter.domain.response.ResUserDTO;
+import vn.hoidanit.jobhunter.domain.response.ResultPaginationDTO;
 import vn.hoidanit.jobhunter.service.UserService;
 import vn.hoidanit.jobhunter.util.annotation.ApiMessage;
 import vn.hoidanit.jobhunter.util.error.IdInvalidException;
@@ -47,6 +47,7 @@ public class UserController {
             throw new IdInvalidException(
                     "Email " + postManUser.getEmail() + "đã tồn tại, vui lòng sử dụng email khác.");
         }
+
         String hashPassword = this.passwordEncoder.encode(postManUser.getPassword());
         postManUser.setPassword(hashPassword);
         User ericUser = this.userService.handleCreateUser(postManUser);
