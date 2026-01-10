@@ -31,6 +31,8 @@ public class FileController {
 
     @Value("${hoidanit.upload-file.base-uri}")
     private String baseURI;
+    
+    
 
     private final FileService fileService;
 

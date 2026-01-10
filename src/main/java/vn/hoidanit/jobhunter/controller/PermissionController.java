@@ -48,11 +48,15 @@ public class PermissionController {
     public ResponseEntity<Permission> update(@Valid @RequestBody Permission p) throws IdInvalidException {
         // check exist by id
         if (this.permissionService.fetchById(p.getId()) == null) {
+
             throw new IdInvalidException("Permission với id = " + p.getId() + " không tồn tại.");
         }
 
         if (this.permissionService.isPermissionExist(p)) {
-            throw new IdInvalidException("Permission da ton tai");
+            if (this.permissionService.isSameName(p)) {
+
+                throw new IdInvalidException("Permission da ton tai");
+            }
         }
 
         return ResponseEntity.ok().body(this.permissionService.update(p));

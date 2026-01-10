@@ -13,12 +13,16 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import vn.hoidanit.jobhunter.util.SecurityUtil;
 
 @Entity
 @Table(name = "permissions")
+@NoArgsConstructor // <--- Thêm dòng này
+@AllArgsConstructor
 @Getter
 @Setter
 public class Permission {
@@ -46,6 +50,16 @@ public class Permission {
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "permissions")
     @JsonIgnore
     private List<Role> roles;
+
+    public Permission(String name,
+            String apiPath,
+            String method,
+            String module) {
+        this.name = name;
+        this.apiPath = apiPath;
+        this.method = method;
+        this.module = module;
+    }
 
     @PrePersist
     public void handleBeforeCreate() {
